@@ -20,8 +20,8 @@ COLORS = {
     1: 'yellow',
     2: 'red',
     3: 'purple',
-    4: 'orange',
-    5: 'light_blue',
+    4: 'pink',
+    5: 'spring_green',
     6: 'green',
     7: 'blue'
 }
