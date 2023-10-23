@@ -1,5 +1,5 @@
 from Case import Case
-from constant import GRID_WIDTH, GRID_HEIGHT
+from constant import GRID_WIDTH
 
 
 class Line:
