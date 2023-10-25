@@ -16,12 +16,13 @@ SPEED = CASE_SIZE / FRAME
 ZERO = 0
 
 COLORS = {
-    0: 'grey',
+    0: 'black',
     1: 'yellow',
     2: 'red',
     3: 'purple',
     4: 'pink',
     5: 'spring_green',
     6: 'green',
-    7: 'blue'
+    7: 'blue',
+    8: 'grey'
 }

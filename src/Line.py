@@ -12,5 +12,5 @@ class LineFactory:
 
     @staticmethod
     def create_line(row: int):
-        return [Case('grey', row, column) for column in range(GRID_WIDTH)]
+        return [Case('black', row, column) for column in range(GRID_WIDTH)]
 
