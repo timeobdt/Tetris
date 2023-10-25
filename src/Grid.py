@@ -43,6 +43,11 @@ class Grid:
         else:
             self.y -= 1
             self.draw_tetriminos()
+            
+            for i in range(len(self.tetriminos)):
+                if self.is_line_complete(self.y + i):
+                    self.remove_line(self.y + i)
+                
             self.change_tetriminos()
             return False
 
@@ -73,3 +78,21 @@ class Grid:
         self.counter_frame += 1
         if not self.counter_frame % FRAME:
             self.go_down()
+            
+    def is_line_complete(self, row):
+        for column in range(1, GRID_WIDTH - 1):  
+            if self.grid[row].line[column].get() == ZERO:
+                return False
+        return True
+    
+    def remove_line(self, row):
+        for i in range(row, 1, -1):
+            for column in range(1, GRID_WIDTH - 1):
+                value = self.grid[i - 1].line[column].get()
+                self.grid[i].line[column].set(value)
+        self.grid[0] = Line(0)
+    
+        
+
+
+    

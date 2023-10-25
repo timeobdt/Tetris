@@ -29,3 +29,5 @@ COLORS = {
 
 RIGHT = 1
 LEFT = -1
+
+KEY_SPEED = 3
