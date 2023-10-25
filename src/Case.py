@@ -13,6 +13,7 @@ class Case(Sprite):
             column * CASE_SIZE + GRID_POSITION_X,
             row * CASE_SIZE + GRID_POSITION_Y
         )
+        self.image = pygame.transform.scale(pygame.image.load(self.path).convert_alpha(), (CASE_SIZE, CASE_SIZE))
 
     def set(self, value: int):
         self.path = f'assets/{COLORS[value]}.jpg'
