@@ -1,5 +1,3 @@
-import pygame.time
-
 from Line import Line
 from constant import GRID_HEIGHT, GRID_WIDTH, ZERO, FRAME
 from Tetriminos import TetriminosFactory
@@ -58,5 +56,5 @@ class Grid:
 
     def update(self):
         self.counter_frame += 1
-        if not self.counter_frame % 10:
+        if not self.counter_frame % FRAME:
             self.go_down()
