@@ -17,7 +17,7 @@ class Grid:
     def change_tetriminos(self):
         self.tetriminos = TetriminosFactory.createRandom()
         self.x = GRID_WIDTH // 2
-        self.y = ZERO
+        self.y = 1
 
     def set(self, row, column, value):
         self.grid[row].line[column].set(value)
