@@ -39,10 +39,12 @@ class Grid:
         self.y += 1
         if self.is_tetriminos_drawable():
             self.draw_tetriminos()
+            return True
         else:
             self.y -= 1
             self.draw_tetriminos()
             self.change_tetriminos()
+            return False
 
     def is_tetriminos_drawable(self):
         for i in range(len(self.tetriminos)):
@@ -53,6 +55,19 @@ class Grid:
                             self.tetriminos[i][j])):
                     return False
         return True
+
+    def horizontal_move(self, direction):
+        self.erase_tetriminos()
+        self.x += direction
+        if self.is_tetriminos_drawable():
+            self.draw_tetriminos()
+        else:
+            self.x -= direction
+            self.draw_tetriminos()
+
+    def place(self):
+        while self.go_down():
+            continue
 
     def update(self):
         self.counter_frame += 1

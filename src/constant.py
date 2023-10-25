@@ -26,3 +26,6 @@ COLORS = {
     7: 'blue',
     8: 'grey'
 }
+
+RIGHT = 1
+LEFT = -1
