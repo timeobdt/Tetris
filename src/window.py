@@ -18,5 +18,6 @@ while True:
             pygame.quit()
             exit()
 
+    grid.update()
     list_sprites.draw(screen)
     pygame.display.update()
