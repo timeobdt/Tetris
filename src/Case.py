@@ -20,7 +20,10 @@ class Case(Sprite):
         self.image = pygame.image.load(self.path).convert_alpha()
 
     def get(self):
-        color = self.path.split('/')[1].split('.')[0]
+        color = self.get_color()
         for k in COLORS.keys():
             if COLORS[k] == color:
                 return k
+
+    def get_color(self):
+        return self.path.split('/')[1].split('.')[0]

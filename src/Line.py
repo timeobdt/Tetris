@@ -7,6 +7,9 @@ class Line:
     def __init__(self, row: int):
         self.line = LineFactory.create_static_line(row)
 
+    def is_full(self):
+        return all(col.get() not in (ZERO, 8) for col in self.line[1:-1])
+
 
 class LineFactory:
 

@@ -43,12 +43,9 @@ class Grid:
         else:
             self.y -= 1
             self.draw_tetriminos()
-            
-            for i in range(len(self.tetriminos)):
-                if self.is_line_complete(self.y + i):
-                    self.remove_line(self.y + i)
-                
             self.change_tetriminos()
+            print('go dans update lines')
+            self.update_lines()
             return False
 
     def is_tetriminos_drawable(self):
@@ -60,6 +57,10 @@ class Grid:
                             self.tetriminos[i][j])):
                     return False
         return True
+
+    def is_line_complete(self, row):
+        print(f'la ligne {row} est complète')
+        return self.grid[row].is_full()
 
     def horizontal_move(self, direction):
         self.erase_tetriminos()
@@ -74,25 +75,21 @@ class Grid:
         while self.go_down():
             continue
 
+    def update_lines(self):
+        for i in range(len(self.grid)):
+            if self.is_line_complete(i):
+                self.remove_line(i)
+
     def update(self):
         self.counter_frame += 1
         if not self.counter_frame % FRAME:
             self.go_down()
-            
-    def is_line_complete(self, row):
-        for column in range(1, GRID_WIDTH - 1):  
-            if self.grid[row].line[column].get() == ZERO:
-                return False
-        return True
-    
+
     def remove_line(self, row):
         for i in range(row, 1, -1):
             for column in range(1, GRID_WIDTH - 1):
                 value = self.grid[i - 1].line[column].get()
                 self.grid[i].line[column].set(value)
         self.grid[0] = Line(0)
-    
-        
-
 
     

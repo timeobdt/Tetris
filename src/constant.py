@@ -30,4 +30,4 @@ COLORS = {
 RIGHT = 1
 LEFT = -1
 
-KEY_SPEED = 1.5
+KEY_SPEED = 5
