@@ -1,5 +1,5 @@
 import random
-
+from constant import ZERO
 
 class TetriminosFactory:
 
@@ -60,4 +60,37 @@ class TetriminosFactory:
         copy = []
         for line in tetriminos:
             copy.append(line[:])
+        return copy
+
+    """
+    [1, 1, 1] => [0, 1] => [0, 1, 0]
+    [0, 1, 0] => [1, 1] => [1, 1, 1]
+              => [0, 1] => 
+    """
+
+
+    """
+    [3, 3, 3] => [0, 0]
+    [0, 3, 0] => [0, 0]
+              => [0, 0]
+    """
+
+    @staticmethod
+    def create_empty(height, width):
+        return [[0 for _ in range(width)] for _ in range(height)]
+
+    @staticmethod
+    def rotate_right(tetriminos):
+        copy = TetriminosFactory.create_empty(len(tetriminos[ZERO]), len(tetriminos))
+        h, w = len(copy[ZERO]), len(copy)
+        for i in range(h):
+            for j in range(w):
+                copy[j][h-i-1] = tetriminos[i][j]
+        return copy
+
+    @staticmethod
+    def rotate_left(tetriminos):
+        copy = TetriminosFactory.create_copy(tetriminos)
+        for i in range(3):
+            copy = TetriminosFactory.rotate_right(copy)
         return copy

@@ -30,6 +30,8 @@ while True:
             grid.go_down()
         elif keys[pygame.K_SPACE]:
             grid.place()
+        elif keys[pygame.K_UP]:
+            grid.rotate()
 
     grid.update()
     screen.fill((10, 10, 10))
