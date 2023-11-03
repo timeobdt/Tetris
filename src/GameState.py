@@ -24,6 +24,7 @@ class MenuGameState(GameState):
         super().__init__(context)
 
     def next(self):
+        GameContext.grid.reset()
         self.context.state = RunningGameState(self.context)
 
     def on_key_pressed(self):
@@ -32,6 +33,7 @@ class MenuGameState(GameState):
             self.next()
 
     def update(self):
+        GameContext.screen.fill(BLACK)
         text = "Veuillez presser SPACE pour jouer."
         font = pygame.font.SysFont('Arial', 64)
         text_surface = font.render(text, False, WHITE)
@@ -52,6 +54,8 @@ class RunningGameState(GameState):
         GameContext.grid.update()
         GameContext.screen.fill((10, 10, 10))
         list_sprites.draw(GameContext.screen)
+        if GameContext.grid.is_over:
+            self.context.state = GameOverGameState(self.context)
 
     def on_key_pressed(self):
         keys = pygame.key.get_pressed()
@@ -92,6 +96,34 @@ class PausedGameState(GameState):
         rect = text_surface.get_rect()
         pause_rect = pause_surface.get_rect()
         x, y = (WIDTH - rect.w) // 2, (HEIGHT - rect.h) // 1.5
+        GameContext.screen.blit(text_surface, (x, y))
+        x, y = (WIDTH - pause_rect.w) // 2, (HEIGHT - pause_rect.h) // 3
+        GameContext.screen.blit(pause_surface, (x, y))
+
+
+class GameOverGameState(GameState):
+    def __init__(self, context):
+        super().__init__(context)
+
+    def next(self):
+        self.context.state = MenuGameState(self.context)
+
+    def on_key_pressed(self):
+        keys = pygame.key.get_pressed()
+        if keys[pygame.K_SPACE]:
+            self.next()
+
+    def update(self):
+        GameContext.screen.fill(BLACK)
+        pause = "GAME OVER"
+        text = "Veuillez presser SPACE pour aller au menu."
+        font = pygame.font.SysFont('Arial', 64)
+        text_surface = font.render(text, False, WHITE)
+        font = pygame.font.SysFont('Arial', 128)
+        pause_surface = font.render(pause, False, WHITE)
+        rect = text_surface.get_rect()
+        x, y = (WIDTH - rect.w) // 2, (HEIGHT - rect.h) // 1.5
+        pause_rect = pause_surface.get_rect()
         GameContext.screen.blit(text_surface, (x, y))
         x, y = (WIDTH - pause_rect.w) // 2, (HEIGHT - pause_rect.h) // 3
         GameContext.screen.blit(pause_surface, (x, y))

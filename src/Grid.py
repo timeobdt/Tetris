@@ -19,6 +19,10 @@ class Grid:
         self.tetriminos = TetriminosFactory.createRandom()
         self.x = GRID_WIDTH // 2
         self.y = 1
+        self.is_over = not self.is_tetriminos_drawable()
+
+    def reset(self):
+        self.__init__()
 
     def set(self, row, column, value):
         self.grid[row].line[column].set(value)
