@@ -13,6 +13,7 @@ class Grid:
         self.change_tetriminos()
         self.draw_tetriminos()
         self.counter_frame = 0
+        self.is_over = False
 
     def change_tetriminos(self):
         self.tetriminos = TetriminosFactory.createRandom()
@@ -33,6 +34,9 @@ class Grid:
             for j in range(len(self.tetriminos[ZERO])):
                 if self.tetriminos[i][j] != ZERO:
                     self.set(self.y + i, self.x + j, ZERO)
+
+    def is_game_over(self):
+        return self.is_over
 
     def go_down(self):
         self.erase_tetriminos()

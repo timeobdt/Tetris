@@ -31,3 +31,6 @@ RIGHT = 1
 LEFT = -1
 
 KEY_SPEED = 10
+
+WHITE = (255, 255, 255)
+BLACK = (0, 0, 0)
