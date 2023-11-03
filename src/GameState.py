@@ -51,8 +51,8 @@ class RunningGameState(GameState):
         self.context.state = PausedGameState(self.context)
 
     def update(self):
-        GameContext.grid.update()
         GameContext.screen.fill((10, 10, 10))
+        GameContext.grid.update()
         list_sprites.draw(GameContext.screen)
         if GameContext.grid.is_over:
             self.context.state = GameOverGameState(self.context)
