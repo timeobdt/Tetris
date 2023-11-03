@@ -39,3 +39,5 @@ KEY_SPEED = 10
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
+background_surf = pygame.image.load("assets/background.png").convert_alpha()
+backgroud_rect = background_surf.get_rect()

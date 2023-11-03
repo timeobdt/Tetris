@@ -1,5 +1,5 @@
 import pygame
-from constant import RIGHT, LEFT, WHITE, WIDTH, HEIGHT, BLACK
+from constant import RIGHT, LEFT, WHITE, WIDTH, HEIGHT, BLACK, backgroud_rect, background_surf
 from Util import list_sprites
 
 
@@ -33,13 +33,19 @@ class MenuGameState(GameState):
             self.next()
 
     def update(self):
-        GameContext.screen.fill(BLACK)
-        text = "Veuillez presser SPACE pour jouer."
-        font = pygame.font.SysFont('Arial', 64)
+        GameContext.screen.blit(background_surf, backgroud_rect)
+        logo_width = 1000 / 3
+        logo_height = 694 / 3
+        logo_surf = pygame.transform.scale(pygame.image.load('assets/logo.png').convert_alpha(), (logo_width, logo_height) )
+        logo_rect = logo_surf.get_rect()
+        text = "Press space to start."
+        font = pygame.font.Font('assets/font/bit5x3.ttf', 64)
         text_surface = font.render(text, False, WHITE)
         rect = text_surface.get_rect()
-        x, y = (WIDTH - rect.w) // 2, (HEIGHT - rect.h) // 2
-        GameContext.screen.blit(text_surface, (x, y))
+        x_text, y_text = (WIDTH - rect.w) // 2, (HEIGHT - rect.h + 100) // 2
+        x_logo, y_logo = (WIDTH - logo_rect.w) // 2, (HEIGHT - logo_rect.h - 300) // 2
+        GameContext.screen.blit(text_surface, (x_text, y_text))
+        GameContext.screen.blit(logo_surf, (x_logo, y_logo))
 
 
 class RunningGameState(GameState):
@@ -51,7 +57,7 @@ class RunningGameState(GameState):
         self.context.state = PausedGameState(self.context)
 
     def update(self):
-        GameContext.screen.fill((10, 10, 10))
+        GameContext.screen.blit(background_surf, backgroud_rect)
         GameContext.grid.update()
         list_sprites.draw(GameContext.screen)
         if GameContext.grid.is_over:
@@ -86,12 +92,11 @@ class PausedGameState(GameState):
             self.next()
 
     def update(self):
-        GameContext.screen.fill(BLACK)
+        GameContext.screen.blit(background_surf, backgroud_rect)
         pause = "PAUSE"
-        text = "Veuillez presser ESCAPE pour reprendre."
-        font = pygame.font.SysFont('Arial', 128)
+        text = "press ESCAPE to resume."
+        font = pygame.font.Font('assets/font/bit5x3.ttf', 64)
         pause_surface = font.render(pause, False, WHITE)
-        font = pygame.font.SysFont('Arial', 64)
         text_surface = font.render(text, False, WHITE)
         rect = text_surface.get_rect()
         pause_rect = pause_surface.get_rect()
@@ -114,12 +119,12 @@ class GameOverGameState(GameState):
             self.next()
 
     def update(self):
-        GameContext.screen.fill(BLACK)
+        GameContext.screen.blit(background_surf, backgroud_rect)
         pause = "GAME OVER"
-        text = "Veuillez presser SPACE pour aller au menu."
-        font = pygame.font.SysFont('Arial', 64)
+        text = "Press SPACE to return to the menu."
+        font = pygame.font.Font('assets/font/bit5x3.ttf', 64)
         text_surface = font.render(text, False, WHITE)
-        font = pygame.font.SysFont('Arial', 128)
+        font = pygame.font.Font('assets/font/bit5x3.ttf', 128)
         pause_surface = font.render(pause, False, WHITE)
         rect = text_surface.get_rect()
         x, y = (WIDTH - rect.w) // 2, (HEIGHT - rect.h) // 1.5
