@@ -3,12 +3,10 @@ import pygame
 from sys import exit
 from Util import list_sprites
 from Grid import Grid
-from constant import WIDTH, HEIGHT, FRAME, RIGHT, LEFT, KEY_SPEED
+from constant import FRAME, KEY_SPEED, screen
 from GameState import GameContext
 
 pygame.init()
-
-screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption('Tetris')
 clock = pygame.time.Clock()
 grid = Grid()
@@ -29,4 +27,5 @@ while True:
     if counter % KEY_SPEED == 0:
         state.on_key_pressed()
     state.update()
+
     pygame.display.update()

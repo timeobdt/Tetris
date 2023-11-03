@@ -1,7 +1,9 @@
+import pygame
 from Line import Line
-from constant import GRID_HEIGHT, GRID_WIDTH, ZERO, FRAME
+from constant import GRID_HEIGHT, GRID_WIDTH, ZERO, FRAME, screen
 from Tetriminos import TetriminosFactory
 
+pygame.init()
 
 class Grid:
 
@@ -14,6 +16,8 @@ class Grid:
         self.draw_tetriminos()
         self.counter_frame = 0
         self.is_over = False
+        self.score = 0
+        self.font = pygame.font.Font('assets/font/bit5x3.ttf', 40)
 
     def change_tetriminos(self):
         self.tetriminos = TetriminosFactory.createRandom()
@@ -89,11 +93,22 @@ class Grid:
         self.draw_tetriminos()
 
     def update_lines(self):
+        line_delete_compter = 0
         for i in range(len(self.grid)):
             if self.is_line_complete(i):
                 self.remove_line(i)
+                line_delete_compter += 1
+        if line_delete_compter == 4:
+            self.score += 800
+        if line_delete_compter == 3:
+            self.score += 500
+        if line_delete_compter == 2 :
+            self.score += 300
+        if line_delete_compter == 1 :
+            self.score += 100
 
     def update(self):
+        self.display_score()
         self.counter_frame += 1
         if not self.counter_frame % FRAME:
             self.go_down()
@@ -104,5 +119,10 @@ class Grid:
                 value = self.grid[i - 1].line[column].get()
                 self.grid[i].line[column].set(value)
         self.grid[0] = Line(0)
+
+    def display_score(self):
+        score_surf = self.font.render(f"{self.score}", False, (255, 255, 255))
+        score_rect = score_surf.get_rect(topleft=(200, 350))
+        screen.blit(score_surf, score_rect)
 
     
