@@ -4,15 +4,14 @@ from sys import exit
 from Util import list_sprites
 from Grid import Grid
 
-from constant import WIDTH, HEIGHT, FRAME, RIGHT, LEFT, KEY_SPEED
+from constant import WIDTH, HEIGHT, FRAME, RIGHT, LEFT, KEY_SPEED, screen
 
 pygame.init()
-
-screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption('Tetris')
 clock = pygame.time.Clock()
 grid = Grid()
 counter = 0
+
 while True:
     counter += 1
     clock.tick(FRAME)
@@ -33,7 +32,7 @@ while True:
         elif keys[pygame.K_UP]:
             grid.rotate()
 
-    grid.update()
     screen.fill((10, 10, 10))
+    grid.update()
     list_sprites.draw(screen)
     pygame.display.update()

@@ -1,3 +1,7 @@
+import pygame
+
+pygame.init()
+
 WIDTH = 1280
 HEIGHT = 720
 
@@ -31,3 +35,4 @@ RIGHT = 1
 LEFT = -1
 
 KEY_SPEED = 10
+screen = pygame.display.set_mode((WIDTH, HEIGHT))
