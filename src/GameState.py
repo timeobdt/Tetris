@@ -1,5 +1,5 @@
 import pygame
-from constant import RIGHT, LEFT, WHITE, WIDTH, HEIGHT, BLACK, backgroud_rect, background_surf
+from constant import RIGHT, LEFT, WHITE, WIDTH, HEIGHT, BLACK, backgroud_rect, background_surf, GRID_WIDTH_IN_WINDOW, GRID_HEIGHT_IN_WINDOW, GRID_POSITION_X, GRID_POSITION_Y
 from Util import list_sprites
 
 
@@ -58,6 +58,7 @@ class RunningGameState(GameState):
 
     def update(self):
         GameContext.screen.blit(background_surf, backgroud_rect)
+        pygame.draw.rect(GameContext.screen, BLACK, pygame.Rect(GRID_POSITION_X, GRID_POSITION_Y, GRID_WIDTH_IN_WINDOW, GRID_HEIGHT_IN_WINDOW))
         GameContext.grid.update()
         list_sprites.draw(GameContext.screen)
         if GameContext.grid.is_over:
