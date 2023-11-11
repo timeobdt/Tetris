@@ -41,10 +41,12 @@ class TetriminosFactory:
     def createO():
         return [[7, 7],
                 [7, 7]]
-
+    
+    stack = []
+    
     @staticmethod
-    def createRandom():
-        all = [
+    def reset_stack():
+        TetriminosFactory.stack = [
             TetriminosFactory.createS(),
             TetriminosFactory.createZ(),
             TetriminosFactory.createO(),
@@ -53,7 +55,16 @@ class TetriminosFactory:
             TetriminosFactory.createT(),
             TetriminosFactory.createI()
         ]
-        return random.choice(all)
+        
+    @staticmethod
+    def createRandom():
+        if not TetriminosFactory.stack:
+            TetriminosFactory.reset_stack()
+            return TetriminosFactory.createRandom()
+        else:   
+            element = random.choice(TetriminosFactory.stack)
+            TetriminosFactory.stack.remove(element)
+            return element
 
     @staticmethod
     def create_copy(tetriminos):

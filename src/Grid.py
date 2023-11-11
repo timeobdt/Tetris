@@ -121,8 +121,11 @@ class Grid:
         self.grid[0] = Line(0)
 
     def display_score(self):
-        score_surf = self.font.render(f"{self.score}", False, (255, 255, 255))
-        score_rect = score_surf.get_rect(topleft=(200, 350))
+        score_case_surf = pygame.image.load("assets/score_case.jpg")
+        score_case_rect = score_case_surf.get_rect(topleft = (100,screen.get_height() / 2 - 116))
+        score_surf = self.font.render(f"score : {self.score}", False, (255, 255, 255))
+        score_rect = score_surf.get_rect(topleft=(132, 287))
+        screen.blit(score_case_surf, score_case_rect)
         screen.blit(score_surf, score_rect)
 
     
